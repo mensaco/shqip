@@ -10,94 +10,103 @@ else
 {
 
     <div class="row">
-        <div class="@Globals.Col3_12">
+        <div class="col-md-3 col-sm-12">
+            <ul class="list-group">
 
-
-
-            @for (int i = 0; i < Emrat.Count; i++)
-            {
-
-                <div class="form-group">
-                    <label class="smalltext-secondary">Trajta e pa shquar</label>
-                    <div class="form-control">@Emrat[i].PaShquar</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="smalltext-secondary">Trajta e shquar</label>
-                    <div class="form-control">@Emrat[i].Shquar</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="smalltext-secondary">Gjinia</label>
-                    <div class="form-control">@Emrat[i].Gjinia</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="smalltext-secondary">Shumësi</label>
-                    <div class="form-control">@Emrat[i].Shumesi</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="smalltext-secondary">P&euml;rshkrimet</label>
-                    @{
-                        var p = Emrat[i].Pershkrimet.Split(Globals.Separator);
-                    }
-                    @for (int j = 0; j < p.Length; j++)
-                    {
-                        <ol class="small">
-                            <li>
-                                @p[j]
-                            </li>
-                        </ol>
-                    }
-
-                </div>
-
-                <div class="form-group">
-                    <label class="smalltext-secondary">Lakimi:</label>
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Njëjës</th>
-                                <th>Shumës</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>Emrore:</th>
-                                <td>@Emrat[i].RasatNjejes.Emerore</td>
-                                <td>@Emrat[i].RasatShumes.Emerore</td>
-                            </tr>
-                            <tr>
-                                <th>Gjinore:</th>
-                                <td>@Emrat[i].RasatNjejes.Gjinore</td>
-                                <td>@Emrat[i].RasatShumes.Gjinore</td>
-                            </tr>
-                            <tr>
-                                <th>Dhanore:</th>
-                                <td>@Emrat[i].RasatNjejes.Dhanore</td>
-                                <td>@Emrat[i].RasatShumes.Dhanore</td>
-                            </tr>
-                            <tr>
-                                <th>Kallzore:</th>
-                                <td>@Emrat[i].RasatNjejes.Kallzore</td>
-                                <td>@Emrat[i].RasatShumes.Kallzore</td>
-                            </tr>
-                            <tr>
-                                <th>Rrjedhore:</th>
-                                <td>@Emrat[i].RasatNjejes.Rrjedhore</td>
-                                <td>@Emrat[i].RasatShumes.Rrjedhore</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                @for (int i = 0; i < Emrat.Count; i++)
+                {
+                    var q = i;
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="javascript:void(0);" @onclick="@(()=>EmriIZgjedhur = Emrat[q])">@Emrat[q].PaShquar, @Emrat[q].Shquar, @Emrat[q].Shumesi</a>
+                </li>
                     
-                </div>
-
-            }
-
+                    
+                }
+            </ul>
         </div>
+        @if (EmriIZgjedhur != null)
+        {
+            <div class="col-md-3 col-sm-12">
+
+                @{
+                    var p = EmriIZgjedhur.Pershkrimet.Split(Globals.Separator);
+                }
+                <ul class="list-group">
+
+                    <ListItemJustified Left="Trajta e pa shquar" Right="@EmriIZgjedhur.PaShquar" />
+                    <ListItemJustified Left="Trajta e shquar" Right="@EmriIZgjedhur.Shquar" />
+                    <ListItemJustified Left="Gjinia" Right="@EmriIZgjedhur.Gjinia.ToString()" />
+                    <ListItemJustified Left="Shumësi" Right="@EmriIZgjedhur.Shumesi" />
+                    <li class="list-group-item">
+                        <label>P&euml;rshkrimet</label>
+                        <div>
+
+                            @for (int j = 0; j < p.Length; j++)
+                            {
+                                <ol class="list-group small">
+                                    <li class="list-group-horizontal ml-3">
+                                        @p[j]
+                                    </li>
+                                </ol>
+                            }
+                        </div>
+
+                    </li>
+                    <li class="list-group-item">
+                        <label>Lakimi</label>
+                        <div>
+                            <table class="table table-sm table-borderless small">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Njëjës</th>
+                                        <th>Shumës</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Emrore:</th>
+                                        <td>@EmriIZgjedhur.RasatNjejes.Emerore</td>
+                                        <td>@EmriIZgjedhur.RasatShumes.Emerore</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gjinore:</th>
+                                        <td>@EmriIZgjedhur.RasatNjejes.Gjinore</td>
+                                        <td>@EmriIZgjedhur.RasatShumes.Gjinore</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dhanore:</th>
+                                        <td>@EmriIZgjedhur.RasatNjejes.Dhanore</td>
+                                        <td>@EmriIZgjedhur.RasatShumes.Dhanore</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kallzore:</th>
+                                        <td>@EmriIZgjedhur.RasatNjejes.Kallzore</td>
+                                        <td>@EmriIZgjedhur.RasatShumes.Kallzore</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Rrjedhore:</th>
+                                        <td>@EmriIZgjedhur.RasatNjejes.Rrjedhore</td>
+                                        <td>@EmriIZgjedhur.RasatShumes.Rrjedhore</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+
+
+                </ul>
+
+
+
+
+
+            </div>
+        }
+
     </div>
+
+
 }
 
 
@@ -105,21 +114,36 @@ else
 
 @inject HttpClient Http
 @inject NavigationManager  NavigationManager
+@inject IJSRuntime JS
+
+@attribute [Authorize]
+
 @code {
 
     public List<Emer> Emrat { get; set; }
 
+    private Emer EmriIZgjedhur { get; set; }
+
+
+
 
     protected async override Task OnInitializedAsync()
     {
+        var token = await JS.GetFromLocalStorage(Shqip.Auth.JWTAuthenticationProvider.TOKENKEY);
+
         if (Http.BaseAddress == null)
         {
             Http.BaseAddress = new Uri(NavigationManager.BaseUri);
         }
+
+        Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", token);
+
         var r = await Http.GetAsync("api/Emrat");
         var json = (await r.Content.ReadAsStringAsync());
         Emrat = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Model.Emer>>(json);
 
+
     }
+
 
 }

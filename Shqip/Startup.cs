@@ -37,9 +37,10 @@ namespace Shqip
         {
             services.AddAuthorizationCore();
 
+
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            _ = services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -56,6 +57,8 @@ namespace Shqip
                ClockSkew = TimeSpan.Zero
            });
 
+
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
@@ -70,23 +73,18 @@ namespace Shqip
                 provider => provider.GetRequiredService<JWTAuthenticationProvider>());
 
             //services.AddMvc().AddNewtonsoftJson();
-
-            // services.AddMvc().AddNewtonsoftJson();
             services.AddResponseCompression(opts =>
             {
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                     new[] { "application/octet-stream" });
             });
 
-
-            services.AddRazorPages();
-            services.AddServerSideBlazor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseResponseCompression();
+            //app.UseResponseCompression();
 
             if (env.IsDevelopment())
             {

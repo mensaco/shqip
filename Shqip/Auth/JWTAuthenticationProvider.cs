@@ -29,7 +29,7 @@ namespace Shqip.Auth
         {
             var token = await js.GetFromLocalStorage(TOKENKEY);
 
-            if (string.IsNullOrEmpty(token) || token.ToLower().Contains("invalid login"))            
+            if (string.IsNullOrEmpty(token) || token.ToLower().Contains("invalid login"))
             {
                 return Anonymous;
             }
@@ -100,5 +100,11 @@ namespace Shqip.Auth
             return Convert.FromBase64String(base64);
         }
 
+        public void NotifyAuthenticationStateChanged()
+        {
+            NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+        }
+
     }
+
 }

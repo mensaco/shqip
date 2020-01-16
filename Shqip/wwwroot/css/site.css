@@ -181,6 +181,10 @@ body {
     background-size: cover !important;
 }
 
+label{
+    color: tomato !important;
+}
+
 @media (max-width: 767.98px) {
     .main .top-row:not(.auth) {
         display: none;

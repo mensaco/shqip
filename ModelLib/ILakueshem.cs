@@ -22,8 +22,8 @@ namespace Model
 
     public enum Gjinia
     {
-        Femrore,
-        Mashkullore,
-        Neutrale // per fjale arkaike apo krahinarizma eventuale
+        femrore,
+        mashkullore,
+        neutrale // per fjale arkaike apo krahinarizma eventuale
     }
 }

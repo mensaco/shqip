@@ -5,7 +5,7 @@
                 customized authorizing...
             </Authorizing>
             <NotAuthorized>
-                customized not authorized
+                You need to <a href="/login">login</a> to be able to access the requested resource.
             </NotAuthorized>
         </AuthorizeRouteView>
     </Found>
@@ -20,12 +20,12 @@
 </Router>
 
 @*<Router AppAssembly="@typeof(Program).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-    </Found>
-    <NotFound>
-        <LayoutView Layout="@typeof(MainLayout)">
-            <p>Sorry, there's nothing at this address.</p>
-        </LayoutView>
-    </NotFound>
-</Router>*@
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p>Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+    </Router>*@
