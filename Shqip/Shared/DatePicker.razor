@@ -1,0 +1,156 @@
+﻿<select class="@Globals.SelectStyle" @bind="@Year" style="max-width:6rem;">
+    <optgroup label="Year"></optgroup>
+    @for (var i = MinDate.Year; i < MaxDate.Year; i++)
+    {
+        var q = i;
+        <option value="@q">@q</option>
+    }
+</select>
+<select class="@Globals.SelectStyle" @bind="@Month" style="max-width:5rem;">
+    <optgroup label="Month"></optgroup>
+    <option value="1">01</option>
+    <option value="2">02</option>
+    <option value="3">03</option>
+    <option value="4">04</option>
+    <option value="5">05</option>
+    <option value="6">06</option>
+    <option value="7">07</option>
+    <option value="8">08</option>
+    <option value="9">09</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+</select>
+<select class="@Globals.SelectStyle" @bind="@Day" style="max-width:5rem;">
+    <optgroup label="Day"></optgroup>
+    <option value="1">01</option>
+    <option value="2">02</option>
+    <option value="3">03</option>
+    <option value="4">04</option>
+    <option value="5">05</option>
+    <option value="6">06</option>
+    <option value="7">07</option>
+    <option value="8">08</option>
+    <option value="9">09</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+    <option value="21">21</option>
+    <option value="22">22</option>
+    <option value="23">23</option>
+    <option value="24">24</option>
+    <option value="25">25</option>
+    <option value="26">26</option>
+    <option value="27">27</option>
+    <option value="28">28</option>
+    @if (29 <= Globals.DaysInMonth[Month])
+    {
+        <option value="29">29</option>
+    }
+    @if (30 <= Globals.DaysInMonth[Month])
+    {
+        <option value="30">30</option>
+    }
+    @if (31 <= Globals.DaysInMonth[Month])
+    {
+        <option value="31">31</option>
+    }
+
+
+</select>
+<button class="@Globals.DarkButtonStyle" @onclick="@OnSelectedDateChanged">OK</button>
+
+@code {
+
+    private List<string> D = new List<string> {
+        "00",
+    };
+
+    private int _Year;
+    private int _Month;
+    private int _Day;
+
+    private int Year
+    {
+        get
+        {
+            return _Year;
+        }
+        set
+        {
+            _Year = value;
+            //OnSelectedDateChanged();
+
+        }
+    }
+
+
+    private int Month
+    {
+        get
+        {
+            return _Month;
+        }
+        set
+        {
+            _Month = value;
+            //OnSelectedDateChanged();
+
+        }
+    }
+    private int Day
+    {
+        get
+        {
+            return _Day;
+        }
+        set
+        {
+            _Day = value;
+            //OnSelectedDateChanged();
+        }
+    }
+
+    [Parameter]
+    public DateTime SelectedDate { get; set; }
+
+    [Parameter]
+    public EventCallback<DateTime> SelectedDateChanged { get; set; }
+
+    private void OnSelectedDateChanged()
+    {
+        var newSelectedDate = new DateTime(Year, Month, Day);
+        SelectedDateChanged.InvokeAsync(newSelectedDate);
+    }
+
+
+    [Parameter]
+    public DateTime MinDate { get; set; } = DateTime.Now.AddYears(-10);
+
+    [Parameter]
+    public DateTime MaxDate { get; set; } = DateTime.Now.AddYears(10);
+
+
+    protected override void OnInitialized()
+    {
+        if (SelectedDate < MinDate) SelectedDate = MinDate;
+        if (SelectedDate > MaxDate) SelectedDate = MaxDate;
+
+        Globals.DaysInMonth[1] = new DateTime(SelectedDate.Year, 3, 1).AddDays(-1).Day;
+
+        Year = SelectedDate.Year;
+        Month = SelectedDate.Month;
+        Day = SelectedDate.Day;
+    }
+
+
+
+}

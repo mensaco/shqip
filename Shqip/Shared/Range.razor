@@ -1,0 +1,26 @@
+﻿<PrePost>
+    <Label>@FirstLabel</Label>
+    <Prefix>@FirstPrefix</Prefix>
+    <Prefix>@FirstPostfix</Prefix>
+    <Content>@FirstContent</Content>
+</PrePost>
+<PrePost>
+    <Label>@LastLabel</Label>
+    <Prefix>@LastPrefix</Prefix>
+    <Prefix>@LastPostfix</Prefix>
+    <Content>@LastContent</Content>
+</PrePost>
+
+@code {
+
+    [Parameter] public RenderFragment FirstLabel { get; set; }
+    [Parameter] public RenderFragment FirstPrefix { get; set; }
+    [Parameter] public RenderFragment FirstPostfix { get; set; }
+    [Parameter] public RenderFragment FirstContent { get; set; }
+                       
+    [Parameter] public RenderFragment LastLabel { get; set; }
+    [Parameter] public RenderFragment LastPrefix { get; set; }
+    [Parameter] public RenderFragment LastPostfix { get; set; }
+    [Parameter] public RenderFragment LastContent { get; set; }
+
+}

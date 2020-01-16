@@ -1,0 +1,125 @@
+﻿@page "/emrat"
+
+<h3>Emrat</h3>
+
+@if (Emrat == null)
+{
+    <span>Loading...</span>
+}
+else
+{
+
+    <div class="row">
+        <div class="@Globals.Col3_12">
+
+
+
+            @for (int i = 0; i < Emrat.Count; i++)
+            {
+
+                <div class="form-group">
+                    <label class="smalltext-secondary">Trajta e pa shquar</label>
+                    <div class="form-control">@Emrat[i].PaShquar</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="smalltext-secondary">Trajta e shquar</label>
+                    <div class="form-control">@Emrat[i].Shquar</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="smalltext-secondary">Gjinia</label>
+                    <div class="form-control">@Emrat[i].Gjinia</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="smalltext-secondary">Shumësi</label>
+                    <div class="form-control">@Emrat[i].Shumesi</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="smalltext-secondary">P&euml;rshkrimet</label>
+                    @{
+                        var p = Emrat[i].Pershkrimet.Split(Globals.Separator);
+                    }
+                    @for (int j = 0; j < p.Length; j++)
+                    {
+                        <ol class="small">
+                            <li>
+                                @p[j]
+                            </li>
+                        </ol>
+                    }
+
+                </div>
+
+                <div class="form-group">
+                    <label class="smalltext-secondary">Lakimi:</label>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Njëjës</th>
+                                <th>Shumës</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Emrore:</th>
+                                <td>@Emrat[i].RasatNjejes.Emerore</td>
+                                <td>@Emrat[i].RasatShumes.Emerore</td>
+                            </tr>
+                            <tr>
+                                <th>Gjinore:</th>
+                                <td>@Emrat[i].RasatNjejes.Gjinore</td>
+                                <td>@Emrat[i].RasatShumes.Gjinore</td>
+                            </tr>
+                            <tr>
+                                <th>Dhanore:</th>
+                                <td>@Emrat[i].RasatNjejes.Dhanore</td>
+                                <td>@Emrat[i].RasatShumes.Dhanore</td>
+                            </tr>
+                            <tr>
+                                <th>Kallzore:</th>
+                                <td>@Emrat[i].RasatNjejes.Kallzore</td>
+                                <td>@Emrat[i].RasatShumes.Kallzore</td>
+                            </tr>
+                            <tr>
+                                <th>Rrjedhore:</th>
+                                <td>@Emrat[i].RasatNjejes.Rrjedhore</td>
+                                <td>@Emrat[i].RasatShumes.Rrjedhore</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+
+            }
+
+        </div>
+    </div>
+}
+
+
+@using Model
+
+@inject HttpClient Http
+@inject NavigationManager  NavigationManager
+@code {
+
+    public List<Emer> Emrat { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        if (Http.BaseAddress == null)
+        {
+            Http.BaseAddress = new Uri(NavigationManager.BaseUri);
+        }
+        var r = await Http.GetAsync("api/Emrat");
+        var json = (await r.Content.ReadAsStringAsync());
+        Emrat = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Model.Emer>>(json);
+
+    }
+
+}

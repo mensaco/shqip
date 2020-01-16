@@ -1,0 +1,28 @@
+﻿<AuthorizeView>
+    <Authorized>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="javascript: void(0);">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Hello, @context.User.Identity.Name!
+            </NavLink>
+        </li>
+       
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Logout">
+                <span class="oi oi-lock-unlocked" aria-hidden="true"></span> Log out
+            </NavLink>
+        </li>
+    </Authorized>
+    <NotAuthorized>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Register">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Register
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Login">
+                <span class="oi oi-lock-locked" aria-hidden="true"></span> Log in
+            </NavLink>
+        </li>
+       
+    </NotAuthorized>
+</AuthorizeView>

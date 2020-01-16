@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200115232154_M1.cs" />
+    <Compile Remove="Migrations\20200115232154_M1.Designer.cs" />
+    <Compile Remove="Migrations\20200116112344_M4.cs" />
+    <Compile Remove="Migrations\20200116112344_M4.Designer.cs" />
+    <Compile Remove="Migrations\20200116112641_M4.cs" />
+    <Compile Remove="Migrations\20200116112641_M4.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Error.razor" />
+    <None Include="Pages\Index.razor" />
+    <None Include="Pages\_Host.cshtml" />
+    <None Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+    <None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
+    <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\README.md" />
+    <None Include="wwwroot\js\IJSRuntimeExtensions.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModelLib\ModelLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Views\" />
+    <Folder Include="wwwroot\css\css\mixins\" />
+    <Folder Include="wwwroot\fonts\flaticon\font\" />
+    <Folder Include="wwwroot\fonts\flaticon\license\" />
+    <Folder Include="wwwroot\fonts\icomoon\" />
+    <Folder Include="wwwroot\fonts\ionicons\css\" />
+    <Folder Include="wwwroot\fonts\ionicons\fonts\" />
+    <Folder Include="wwwroot\fonts\open-iconic\" />
+    <Folder Include="wwwroot\scss\bootstrap\mixins\" />
+    <Folder Include="wwwroot\scss\bootstrap\utilities\" />
+  </ItemGroup>
+
+</Project>

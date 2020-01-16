@@ -1,0 +1,31 @@
+﻿<div class="form-group text-white">
+    @if (Label != null)
+    {
+        <label class="control-label">@Label</label>
+    }
+    <div class="form-group">
+        <div class="input-group mb-3">
+            @if (Prefix != null)
+            {
+                <div class="input-group-prepend p-2  @Globals.DarkButtonStyle">
+                    <span class="input-group-text">@Prefix</span>
+                </div>
+            }
+            @Content
+            @if (Postfix != null)
+            {
+                <div class="input-group-append p-2 @Globals.DarkButtonStyle">
+                    <span class="input-group-text">@Postfix</span>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+@code {
+    [Parameter] public RenderFragment Label { get; set; }
+    [Parameter] public RenderFragment Prefix { get; set; }
+    [Parameter] public RenderFragment Postfix { get; set; }
+    [Parameter] public RenderFragment Content { get; set; }
+
+}

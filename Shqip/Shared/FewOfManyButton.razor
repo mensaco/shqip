@@ -1,0 +1,37 @@
+﻿@if (Buttons != null)
+{
+    foreach (var button in Buttons)
+    {<button class="@((SelectedButtons.Contains(button.Key)) ? SelectedCssClass : CssClass)" @onclick="@(()=>ChooseButton(button))">@button.Key</button>}
+}
+
+
+@code {
+    [Parameter] public string SelectedButtons { get; set; } = "";
+    [Parameter] public Dictionary<string, bool> Buttons { get; set; }
+    [Parameter] public string CssClass { get; set; } = "";
+    [Parameter] public string SelectedCssClass { get; set; } = "";
+
+    [Parameter] public EventCallback<string> SelectedButtonsChanged { get; set; }
+
+    private async Task OnSelectedButtonsChanged()
+    {
+        await SelectedButtonsChanged.InvokeAsync(SelectedButtons);
+    }
+
+    private async Task ChooseButton(KeyValuePair<string, bool> button)
+    {
+        var l = SelectedButtons.Split(';', StringSplitOptions.RemoveEmptyEntries).ToList();
+
+        if (SelectedButtons.Contains(button.Key))
+        {
+            l.Remove(button.Key);
+        }
+        else
+        {
+            l.Add(button.Key);
+        }
+        SelectedButtons = string.Join(';', l);
+        await OnSelectedButtonsChanged();
+    }
+
+}

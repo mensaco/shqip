@@ -1,0 +1,49 @@
+﻿@page "/login"
+
+@inject HttpClient http
+@inject ILoginService  loginService
+@inject NavigationManager navigationManager
+
+<h3>Log in</h3>
+
+<EditForm Model="userInfo" OnValidSubmit="LoginUser">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label>Email:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@userInfo.Email" />
+            <ValidationMessage For="@(() => userInfo.Email)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Password:</label>
+        <div>
+            <InputPassword class="form-control" @bind-Value="@userInfo.Password" />
+            <ValidationMessage For="@(() => userInfo.Password)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Log in</button>
+
+</EditForm>
+
+@code {
+    private UserInfo userInfo = new UserInfo();
+
+    async Task LoginUser()
+    {
+        if(http.BaseAddress == null)
+        {
+            http.BaseAddress = new Uri(navigationManager.BaseUri);
+        }
+        var response = await http.PostAsJsonAsync<UserInfo>("api/accounts/login", userInfo);
+        var result = response.Content.ReadAsStringAsync().Result;
+        var userToken = Newtonsoft.Json.JsonConvert.DeserializeObject<UserToken>(result);
+
+        await loginService.Login(userToken.Token);
+        StateHasChanged();
+        navigationManager.NavigateTo("");
+    }
+}

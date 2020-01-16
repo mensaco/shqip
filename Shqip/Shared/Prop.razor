@@ -1,0 +1,15 @@
+﻿<div class="col-md-3 col-sm-12">
+    <label class="mr-2 text-warning">@Label</label> <span class="font-weight-bold">@Text</span>
+    @if (Suffix != null)
+    {
+        <span class="font-weight-normal">@Suffix</span>
+    }
+</div>
+
+@code {
+
+    [Parameter] public RenderFragment Label { get; set; }
+    [Parameter] public RenderFragment Text { get; set; }
+    [Parameter] public RenderFragment Suffix { get; set; }
+
+}

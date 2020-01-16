@@ -1,0 +1,28 @@
+﻿@if (Buttons != null)
+{
+    foreach (var button in Buttons)
+    {<button class="@((button.Key == SelectedButton) ? SelectedCssClass : CssClass)" @onclick="@(()=>ChooseButton(button))">@button.Key</button>}
+}
+
+
+@code {
+
+    [Parameter] public Dictionary<string, bool> Buttons { get; set; }
+    [Parameter] public string SelectedButton { get; set; } = "";
+    [Parameter] public string CssClass { get; set; } = "";
+    [Parameter] public string SelectedCssClass { get; set; } = "";
+
+    [Parameter] public EventCallback<string> SelectedButtonChanged { get; set; }
+
+    private async Task OnSelectedButtonChanged()
+    {
+        await SelectedButtonChanged.InvokeAsync(SelectedButton);
+    }
+
+    private async Task ChooseButton(KeyValuePair<string, bool> button)
+    {
+        SelectedButton = button.Key;
+        await OnSelectedButtonChanged();
+    }
+
+}
