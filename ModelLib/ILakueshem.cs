@@ -1,16 +1,20 @@
-﻿using System.Collections.Generic;
-
-namespace Model
+﻿namespace Model
 {
     public interface ILakueshem
     {
-        string Shquar { get; set; } // trajta e shquar
-        string PaShquar { get; set; } // trajta e pa shquar
-        Gjinia Gjinia { get; set; }
-        string Shumesi { get; set; }
+        string NjejesiShquar { get; set; } // trajta e shquar
+        string NjejesiPashquar { get; set; } // trajta e pa shquar
+        string ShumesiShquar { get; set; }
+        string ShumesiPashquar { get; set; }
 
-        Rase RasatNjejes { get; set; } // emerore, gjinore, dhanore, kallzore, rrjedhore
-        Rase RasatShumes { get; set; } // emerore, gjinore, dhanore, kallzore, rrjedhore
+        Gjinia Gjinia { get; set; }
+
+        Rase RasatNjejesPashquar { get; set; } // emerore, gjinore, dhanore, kallzore, rrjedhore
+        Rase RasatShumesPashquar { get; set; } // emerore, gjinore, dhanore, kallzore, rrjedhore
+
+        Rase RasatNjejesShquar { get; set; } 
+        Rase RasatShumesShquar { get; set; } 
+
 
         string Sinonimet { get; set; }
         string Antonimet { get; set; }
@@ -18,12 +22,5 @@ namespace Model
 
 
 
-    }
-
-    public enum Gjinia
-    {
-        femrore,
-        mashkullore,
-        neutrale // per fjale arkaike apo krahinarizma eventuale
     }
 }

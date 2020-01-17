@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shqip.Data;
 
 namespace Shqip.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200116172854_M5")]
+    partial class M5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,10 +171,7 @@ namespace Shqip.Migrations
                     b.Property<int>("Lloji")
                         .HasColumnType("int");
 
-                    b.Property<string>("NjejesiPashquar")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NjejesiShquar")
+                    b.Property<string>("PaShquar")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Pershkrimet")
@@ -181,19 +180,13 @@ namespace Shqip.Migrations
                     b.Property<int?>("RasatNjejesPashquarId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RasatNjejesShquarId")
+                    b.Property<int?>("RasatShumesPaShquarId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RasatShumesPashquarId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RasatShumesShquarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShumesiPashquar")
+                    b.Property<string>("Shquar")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ShumesiShquar")
+                    b.Property<string>("Shumesi")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sinonimet")
@@ -209,11 +202,7 @@ namespace Shqip.Migrations
 
                     b.HasIndex("RasatNjejesPashquarId");
 
-                    b.HasIndex("RasatNjejesShquarId");
-
-                    b.HasIndex("RasatShumesPashquarId");
-
-                    b.HasIndex("RasatShumesShquarId");
+                    b.HasIndex("RasatShumesPaShquarId");
 
                     b.ToTable("Emrat");
                 });
@@ -373,17 +362,9 @@ namespace Shqip.Migrations
                         .WithMany()
                         .HasForeignKey("RasatNjejesPashquarId");
 
-                    b.HasOne("Model.Rase", "RasatNjejesShquar")
+                    b.HasOne("Model.Rase", "RasatShumesPaShquar")
                         .WithMany()
-                        .HasForeignKey("RasatNjejesShquarId");
-
-                    b.HasOne("Model.Rase", "RasatShumesPashquar")
-                        .WithMany()
-                        .HasForeignKey("RasatShumesPashquarId");
-
-                    b.HasOne("Model.Rase", "RasatShumesShquar")
-                        .WithMany()
-                        .HasForeignKey("RasatShumesShquarId");
+                        .HasForeignKey("RasatShumesPaShquarId");
                 });
 #pragma warning restore 612, 618
         }

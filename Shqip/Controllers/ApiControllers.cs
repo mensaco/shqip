@@ -19,7 +19,11 @@ namespace Shqip.Controllers
         {
             get
             {
-                return base.Items.Include(r => r.RasatNjejes).Include(r => r.RasatShumes);
+                return base.Items
+                    .Include(r => r.RasatNjejesPashquar)
+                    .Include(r => r.RasatShumesPashquar)
+                    .Include(r => r.RasatNjejesShquar)
+                    .Include(r => r.RasatShumesShquar);
             }
         }
     }

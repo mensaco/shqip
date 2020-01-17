@@ -4,7 +4,7 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-a, .btn-link {
+/*a, .btn-link {
     color: #0366d6;
 }
 
@@ -12,7 +12,7 @@ a, .btn-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
-}
+}*/
 
 app {
     position: relative;
@@ -117,15 +117,15 @@ app {
     color: red;
 }
 
-.btn {
+/*.btn {
     background-image: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 49%, rgba(0,0,0,0.15) 51%, rgba(0,0,0,0.05));
     background-repeat: repeat-x;
-}
+}*/
 
-.select {
+/*.select {
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.2) 49%, rgba(255,255,255,0.15) 51%, rgba(255,255,255,0.05));
     background-repeat: repeat-x;
-}
+}*/
 
 .oneOfManySelected{
     background: green;
@@ -177,13 +177,13 @@ input[type='text']:focus, select:focus{
   }
 
 body {
-    background: url("../images/pexels-photo-2724749.jpeg") no-repeat !important;
-    background-size: cover !important;
+    /*background: url("../images/pexels-photo-2724749.jpeg") no-repeat !important;
+    background-size: cover !important;*/
 }
 
-label{
+/*label{
     color: tomato !important;
-}
+}*/
 
 @media (max-width: 767.98px) {
     .main .top-row:not(.auth) {

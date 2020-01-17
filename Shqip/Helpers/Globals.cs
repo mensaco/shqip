@@ -2,8 +2,8 @@
 {
     public static class Globals
     {
-        public static readonly string TextBoxStyle = "form-control btn btn-light text-left border border-dark";
-        public static readonly string SelectStyle = "form-control btn btn-light border border-dark";
+        public static readonly string TextBoxStyle = "form-control"; // btn btn-light text-left border border-dark";
+        public static readonly string SelectStyle = "form-control";
 
         public static readonly string Col3_12 = "col-md-3 col-sm-12";
 

@@ -8,19 +8,21 @@
 }
 else
 {
-
-    <div class="row">
+    <a href="/krijoemer" class="btn btn-primary">Regjistro një em&euml;r t&euml; ri</a>
+    <div class="row mt-3">
         <div class="col-md-3 col-sm-12">
             <ul class="list-group">
 
                 @for (int i = 0; i < Emrat.Count; i++)
                 {
                     var q = i;
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="javascript:void(0);" @onclick="@(()=>EmriIZgjedhur = Emrat[q])">@Emrat[q].PaShquar, @Emrat[q].Shquar, @Emrat[q].Shumesi</a>
-                </li>
-                    
-                    
+                    var active = EmriIZgjedhur == Emrat[q];
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center @((active)?" active":"")">
+                        <a class="btn btn-link @((active)?" text-white":"")" href="javascript:void(0);" @onclick="@(()=>EmriIZgjedhur = Emrat[q])">@Emrat[q].NjejesiPashquar, @Emrat[q].NjejesiShquar, @Emrat[q].ShumesiShquar</a>
+                    </li>
+
+
                 }
             </ul>
         </div>
@@ -33,10 +35,10 @@ else
                 }
                 <ul class="list-group">
 
-                    <ListItemJustified Left="Trajta e pa shquar" Right="@EmriIZgjedhur.PaShquar" />
-                    <ListItemJustified Left="Trajta e shquar" Right="@EmriIZgjedhur.Shquar" />
+                    <ListItemJustified Left="Trajta e pa shquar" Right="@EmriIZgjedhur.NjejesiPashquar" />
+                    <ListItemJustified Left="Trajta e shquar" Right="@EmriIZgjedhur.NjejesiShquar" />
                     <ListItemJustified Left="Gjinia" Right="@EmriIZgjedhur.Gjinia.ToString()" />
-                    <ListItemJustified Left="Shumësi" Right="@EmriIZgjedhur.Shumesi" />
+                    <ListItemJustified Left="Shumësi" Right="@EmriIZgjedhur.ShumesiShquar" />
                     <li class="list-group-item">
                         <label>P&euml;rshkrimet</label>
                         <div>
@@ -52,8 +54,24 @@ else
                         </div>
 
                     </li>
+
+
+                </ul>
+
+
+
+
+
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+
+
+                <ul class="list-group">
+
+
                     <li class="list-group-item">
-                        <label>Lakimi</label>
+                        <label>Lakimi (trajta e pa shquar)</label>
                         <div>
                             <table class="table table-sm table-borderless small">
                                 <thead>
@@ -66,28 +84,28 @@ else
                                 <tbody>
                                     <tr>
                                         <th>Emrore:</th>
-                                        <td>@EmriIZgjedhur.RasatNjejes.Emerore</td>
-                                        <td>@EmriIZgjedhur.RasatShumes.Emerore</td>
+                                        <td>@EmriIZgjedhur.RasatNjejesPashquar.Emerore</td>
+                                        <td>@EmriIZgjedhur.RasatShumesPashquar.Emerore</td>
                                     </tr>
                                     <tr>
                                         <th>Gjinore:</th>
-                                        <td>@EmriIZgjedhur.RasatNjejes.Gjinore</td>
-                                        <td>@EmriIZgjedhur.RasatShumes.Gjinore</td>
+                                        <td>@EmriIZgjedhur.RasatNjejesPashquar.Gjinore</td>
+                                        <td>@EmriIZgjedhur.RasatShumesPashquar.Gjinore</td>
                                     </tr>
                                     <tr>
                                         <th>Dhanore:</th>
-                                        <td>@EmriIZgjedhur.RasatNjejes.Dhanore</td>
-                                        <td>@EmriIZgjedhur.RasatShumes.Dhanore</td>
+                                        <td>@EmriIZgjedhur.RasatNjejesPashquar.Dhanore</td>
+                                        <td>@EmriIZgjedhur.RasatShumesPashquar.Dhanore</td>
                                     </tr>
                                     <tr>
                                         <th>Kallzore:</th>
-                                        <td>@EmriIZgjedhur.RasatNjejes.Kallzore</td>
-                                        <td>@EmriIZgjedhur.RasatShumes.Kallzore</td>
+                                        <td>@EmriIZgjedhur.RasatNjejesPashquar.Kallzore</td>
+                                        <td>@EmriIZgjedhur.RasatShumesPashquar.Kallzore</td>
                                     </tr>
                                     <tr>
                                         <th>Rrjedhore:</th>
-                                        <td>@EmriIZgjedhur.RasatNjejes.Rrjedhore</td>
-                                        <td>@EmriIZgjedhur.RasatShumes.Rrjedhore</td>
+                                        <td>@EmriIZgjedhur.RasatNjejesPashquar.Rrjedhore</td>
+                                        <td>@EmriIZgjedhur.RasatShumesPashquar.Rrjedhore</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -102,6 +120,64 @@ else
 
 
             </div>
+
+            <div class="col-md-3 col-sm-12">
+
+
+                <ul class="list-group">
+
+
+                    <li class="list-group-item">
+                        <label>Lakimi (trajta e shquar)</label>
+                        <div>
+                            <table class="table table-sm table-borderless small">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Njëjës</th>
+                                        <th>Shumës</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Emrore:</th>
+                                        <td>@EmriIZgjedhur.RasatNjejesShquar.Emerore</td>
+                                        <td>@EmriIZgjedhur.RasatShumesShquar.Emerore</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gjinore:</th>
+                                        <td>@EmriIZgjedhur.RasatNjejesShquar.Gjinore</td>
+                                        <td>@EmriIZgjedhur.RasatShumesShquar.Gjinore</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dhanore:</th>
+                                        <td>@EmriIZgjedhur.RasatNjejesShquar.Dhanore</td>
+                                        <td>@EmriIZgjedhur.RasatShumesShquar.Dhanore</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kallzore:</th>
+                                        <td>@EmriIZgjedhur.RasatNjejesShquar.Kallzore</td>
+                                        <td>@EmriIZgjedhur.RasatShumesShquar.Kallzore</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Rrjedhore:</th>
+                                        <td>@EmriIZgjedhur.RasatNjejesShquar.Rrjedhore</td>
+                                        <td>@EmriIZgjedhur.RasatShumesShquar.Rrjedhore</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+
+
+                </ul>
+
+
+
+
+
+            </div>
+
         }
 
     </div>

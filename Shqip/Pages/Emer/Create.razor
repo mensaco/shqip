@@ -1,0 +1,302 @@
+﻿@page "/krijoemer"
+<h3>Regjistro em&euml;r t&euml; ri</h3>
+
+
+<EditForm Model="Emri" OnValidSubmit="@OnValidSubmit" OnInvalidSubmit="@OnInvalidSubmit">
+
+    <DataAnnotationsValidator />
+
+    <div class="row">
+        <div class="@Globals.Col3_12">
+
+
+            <div class="form-group">
+                <label>NjejesiShquar</label>
+                <input type="text" @bind="@Emri.NjejesiShquar" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>NjejesiPashquar</label>
+                <input type="text" @bind="@Emri.NjejesiPashquar" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>ShumesiShquar</label>
+                <input type="text" @bind="@Emri.ShumesiShquar" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>ShumesiPashquar</label>
+                <input type="text" @bind="@Emri.ShumesiPashquar" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Gjinia</label>
+                <select @bind="@Emri.Gjinia" class="@Globals.SelectStyle">
+                    <option value="@Gjinia.femrore">femrore</option>
+                    <option value="@Gjinia.mashkullore">mashkullore</option>
+                    <option value="@Gjinia.asnjanese">asnjanëse</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Lloji</label>
+                <select @bind="@Emri.Lloji" class="@Globals.SelectStyle">
+                    <option value="@Lloji.i_Pervetshem">i përvetshëm</option>
+                    <option value="@Lloji.i_Pergjithshem">i përgjithshëm</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>P&euml;rshkrimet</label>
+                <ul class="list-group">
+                    <li class="list-group-item"><textarea @bind="@Pershkrim" class="@Globals.TextBoxStyle"></textarea> <a href="javascript:void(0);" @onclick="@AddPershkrim">shto</a></li>
+                    @for (int i = 0; i < Pershkrimet.Count; i++)
+                    {
+                        var s = i;
+                        <li class="list-group-item">@Pershkrimet[s]  <a href="javascript:void(0);" @onclick="@(()=>RemovePershkrim(Pershkrimet[s]))">hiq</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="@Globals.Col3_12">
+            <h5>Lakimi - njëjës - i pa shquar</h5>
+            <div class="form-group">
+                <label>Emrore</label>
+                <input type="text" @bind="@Emri.RasatNjejesPashquar.Emerore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Gjinore</label>
+                <input type="text" @bind="@Emri.RasatNjejesPashquar.Gjinore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Dhanore</label>
+                <input type="text" @bind="@Emri.RasatNjejesPashquar.Dhanore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Kallzore</label>
+                <input type="text" @bind="@Emri.RasatNjejesPashquar.Kallzore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Rrjedhore</label>
+                <input type="text" @bind="@Emri.RasatNjejesPashquar.Rrjedhore" class="@Globals.TextBoxStyle" />
+            </div>
+        </div>
+
+        <div class="@Globals.Col3_12">
+            <h5>Lakimi - njëjës - i shquar</h5>
+            <div class="form-group">
+                <label>Emrore</label>
+                <input type="text" @bind="@Emri.RasatNjejesShquar.Emerore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Gjinore</label>
+                <input type="text" @bind="@Emri.RasatNjejesShquar.Gjinore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Dhanore</label>
+                <input type="text" @bind="@Emri.RasatNjejesShquar.Dhanore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Kallzore</label>
+                <input type="text" @bind="@Emri.RasatNjejesShquar.Kallzore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Rrjedhore</label>
+                <input type="text" @bind="@Emri.RasatNjejesShquar.Rrjedhore" class="@Globals.TextBoxStyle" />
+            </div>
+        </div>
+        <div class="@Globals.Col3_12">
+
+            <h5>Lakimi - shumës - i pa shquar</h5>
+            <div class="form-group">
+                <label>Emrore</label>
+                <input type="text" @bind="@Emri.RasatShumesPashquar.Emerore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Gjinore</label>
+                <input type="text" @bind="@Emri.RasatShumesPashquar.Gjinore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Dhanore</label>
+                <input type="text" @bind="@Emri.RasatShumesPashquar.Dhanore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Kallzore</label>
+                <input type="text" @bind="@Emri.RasatShumesPashquar.Kallzore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Rrjedhore</label>
+                <input type="text" @bind="@Emri.RasatShumesPashquar.Rrjedhore" class="@Globals.TextBoxStyle" />
+            </div>
+        </div>
+        <div class="@Globals.Col3_12">
+            <h5>Lakimi - shumës - i shquar</h5>
+            <div class="form-group">
+                <label>Emrore</label>
+                <input type="text" @bind="@Emri.RasatShumesShquar.Emerore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Gjinore</label>
+                <input type="text" @bind="@Emri.RasatShumesShquar.Gjinore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Dhanore</label>
+                <input type="text" @bind="@Emri.RasatShumesShquar.Dhanore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Kallzore</label>
+                <input type="text" @bind="@Emri.RasatShumesShquar.Kallzore" class="@Globals.TextBoxStyle" />
+            </div>
+            <div class="form-group">
+                <label>Rrjedhore</label>
+                <input type="text" @bind="@Emri.RasatShumesShquar.Rrjedhore" class="@Globals.TextBoxStyle" />
+            </div>
+
+
+        </div>
+
+        <div class="@Globals.Col3_12">
+            <div class="form-group">
+                <label>Sinonimet</label>
+                <ul class="list-group">
+                    <li class="list-group-item"><input type="text" @bind="@Sinonim" class="@Globals.TextBoxStyle" /> <a href="javascript:void(0);" @onclick="@AddSinonim">shto</a></li>
+                    @for (int i = 0; i < Sinonimet.Count; i++)
+                    {
+                        var s = i;
+                        <li class="list-group-item">@Sinonimet[s]  <a href="javascript:void(0);" @onclick="@(()=>RemoveSinonim(Sinonimet[s]))">hiq</a></li>
+                    }
+                </ul>
+            </div>
+            <div class="form-group">
+                <label>Antonimet</label>
+                <ul class="list-group">
+                    <li class="list-group-item"><input type="text" @bind="@Antonim" class="@Globals.TextBoxStyle" /> <a href="javascript:void(0);" @onclick="@AddAntonim">shto</a></li>
+                    @for (int i = 0; i < Antonimet.Count; i++)
+                    {
+                        var t = i;
+                        <li class="list-group-item">@Antonimet[t]  <a href="javascript:void(0);" @onclick="@(()=>RemoveAntonim(Antonimet[t]))">hiq</a></li>
+                    }
+                </ul>
+            </div>
+            <div class="form-group">
+                <label>Te ngjashëm</label>
+                <ul class="list-group">
+                    <li class="list-group-item"><input type="text" @bind="@INgjashem" class="@Globals.TextBoxStyle" /> <a href="javascript:void(0);" @onclick="@AddINgjashem">shto</a></li>
+                    @for (int i = 0; i < TeNgjashem.Count; i++)
+                    {
+                        var u = i;
+
+                        <li class="list-group-item">@TeNgjashem[u]  <a href="javascript:void(0);" @onclick="@(()=>RemoveINgjashem(TeNgjashem[u]))">hiq</a></li>
+                    }
+                </ul>
+            </div>
+
+            <button type="submit">Create</button>
+
+        </div>
+    </div>
+
+</EditForm>
+
+
+@using Model
+@using System.Text
+
+@inject HttpClient Http
+@inject NavigationManager  NavigationManager
+@inject IJSRuntime JS
+
+
+
+@code {
+    [Parameter] public Emer Emri { get; set; } = new Emer();
+
+    private List<string> Sinonimet { get; set; } = new List<string>();
+    private List<string> Antonimet { get; set; } = new List<string>();
+    private List<string> TeNgjashem { get; set; } = new List<string>();
+
+    private List<string> Pershkrimet { get; set; } = new List<string>();
+
+
+    public string Sinonim { get; set; }
+    public string Antonim { get; set; }
+    public string INgjashem { get; set; }
+
+    public string Pershkrim { get; set; }
+
+
+    private void AddSinonim()
+    {
+        Sinonimet.Add(Sinonim);
+        Sinonim = "";
+    }
+
+    private void AddAntonim()
+    {
+        Antonimet.Add(Antonim);
+        Antonim = "";
+    }
+
+    private void AddINgjashem()
+    {
+        TeNgjashem.Add(INgjashem);
+        INgjashem = "";
+    }
+
+    private void AddPershkrim()
+    {
+        Pershkrimet.Add(Pershkrim);
+        Pershkrim = "";
+    }
+
+
+
+    private void RemoveSinonim(string sinonim)
+    {
+        Sinonimet.Remove(sinonim);
+        Sinonim = sinonim;
+    }
+
+    private void RemoveAntonim(string antonim)
+    {
+        Antonimet.Remove(antonim);
+        Antonim = antonim;
+    }
+
+    private void RemoveINgjashem(string ingjashem)
+    {
+        TeNgjashem.Remove(ingjashem);
+        INgjashem = ingjashem;
+    }
+
+
+    private void RemovePershkrim(string pershkrim)
+    {
+        Pershkrimet.Remove(pershkrim);
+        Pershkrim = pershkrim;
+    }
+
+    private async Task OnValidSubmit()
+    {
+        Emri.Sinonimet = string.Join(Globals.Separator, Sinonimet);
+        Emri.Antonimet = string.Join(Globals.Separator, Antonimet);
+        Emri.TeNgjashme = string.Join(Globals.Separator, TeNgjashem);
+        Emri.Pershkrimet = string.Join(Globals.Separator, Pershkrimet);
+
+        var token = await JS.GetFromLocalStorage(Shqip.Auth.JWTAuthenticationProvider.TOKENKEY);
+
+        if (Http.BaseAddress == null)
+        {
+            Http.BaseAddress = new Uri(NavigationManager.BaseUri);
+        }
+
+        Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", token);
+        
+        var r = await Http.PostAsJsonAsync<Emer>("api/Emrat",Emri);
+        var json = (await r.Content.ReadAsStringAsync());
+        NavigationManager.NavigateTo("/emrat", true);
+    }
+
+    private void OnInvalidSubmit()
+    {
+
+    }
+}
