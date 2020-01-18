@@ -9,11 +9,11 @@
 
         Gjinia Gjinia { get; set; }
 
-        Rase RasatNjejesPashquar { get; set; } // emerore, gjinore, dhanore, kallzore, rrjedhore
-        Rase RasatShumesPashquar { get; set; } // emerore, gjinore, dhanore, kallzore, rrjedhore
+        Rasa RasatNjejesPashquar { get; set; } // emerore, gjinore, dhanore, kallzore, rrjedhore
+        Rasa RasatShumesPashquar { get; set; } // emerore, gjinore, dhanore, kallzore, rrjedhore
 
-        Rase RasatNjejesShquar { get; set; } 
-        Rase RasatShumesShquar { get; set; } 
+        Rasa RasatNjejesShquar { get; set; } 
+        Rasa RasatShumesShquar { get; set; } 
 
 
         string Sinonimet { get; set; }

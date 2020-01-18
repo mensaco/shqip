@@ -10,7 +10,7 @@
         public static readonly string PrimaryButtonStyle = "btn btn-primary";
         public static readonly string DarkButtonStyle = "btn btn-dark";
         public static readonly string ListJustified = "list-group-item d-flex justify-content-between align-items-center";
-        public static readonly string ListJR = "";
+        public static readonly string ListJR = "font-weight-bold";
 
         public static readonly char Separator = ';';
 

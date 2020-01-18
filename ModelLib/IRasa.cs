@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public interface IRase
+    public interface IRasa
     {
         int Id { get; set; }
         string Emerore { get; set; }

@@ -3,6 +3,13 @@
 @inject NavigationManager Navi
 
 
-@code{
+@code{       
+
+    private string Json { get; set; }
+
+    protected override void OnInitialized()
+    {
+        //Json = Newtonsoft.Json.JsonConvert.SerializeObject(Templater.Scaffold(typeof(Model.Emer), "", "Rase"));
+    }
 
 }

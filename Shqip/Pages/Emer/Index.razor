@@ -8,9 +8,80 @@
 }
 else
 {
-    <a href="/krijoemer" class="btn btn-primary">Regjistro një em&euml;r t&euml; ri</a>
+    <div class="row">
+        <div class="@Globals.Col3_12">
+            <div class="form-inline">
+                <label>Filter:</label>
+                <input type="text" class="form-control" @bind="@Filter" />
+            </div>
+        </div>
+        <div class="@Globals.Col3_12">
+            <div class="form-inline">
+                <label>Sort:</label>
+                <input type="text" class="form-control" @bind="@SortOrder" />
+            </div>
+        </div>
+        <div class="@Globals.Col3_12">
+            <div class="form-inline">
+                <label>Page Size:</label>
+                <select class="form-control" @bind="@PageSize">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+        </div>
+        <div class="@Globals.Col3_12">
+            <button @onclick="@GetPageFiltered">Go</button>
+        </div>
+
+
+    </div>
+
+    @if (Emrat.Count >= 0 && TotalItems > 0)
+    {
+        <div>@Emrat.Count of @TotalItems items returned.</div>
+    }
+
+    <div class="row mt-3">
+        <div class="@Globals.Col3_12">
+            <a href="/krijoemer" class="btn btn-outline-success">Regjistro një em&euml;r t&euml; ri</a>
+        </div>
+    </div>
+    @if (TotalPages > 0 && 0 <= PageIndex && PageIndex < TotalPages)
+    {
+        var firstPage = PageIndex - TotalPages % 5;
+        var lastPage = firstPage + 4;
+
+        if(lastPage > TotalPages - 1)
+        {
+            lastPage = TotalPages - 1;
+        }
+
+
+        <nav class="mt-3" aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="javascript:void(0);" @onclick="@(async () => { PageIndex = ((PageIndex > 0) ? PageIndex-1: 0); await GetPageFiltered(); } )">Previous</a></li>
+
+                @for (var p = firstPage; p < lastPage + 1; p++)
+                {
+                    var q = p; ;
+
+
+                    <li class="page-item @((q == PageIndex)?"active":"")"><a class="page-link" href="javascript:void(0);" @onclick="@(async () => { PageIndex = q; await GetPageFiltered(); } )">@(q+1)</a></li>
+
+                }
+
+
+                <li class="page-item"><a class="page-link" href="javascript:void(0);" @onclick="@(async () => { PageIndex = ((PageIndex < TotalPages - 1) ? PageIndex+1: TotalPages -1 ); } )">Next</a></li>
+
+            </ul>
+        </nav>
+    }
+
     <div class="row mt-3">
         <div class="col-md-3 col-sm-12">
+
             <ul class="list-group">
 
                 @for (int i = 0; i < Emrat.Count; i++)
@@ -18,8 +89,13 @@ else
                     var q = i;
                     var active = EmriIZgjedhur == Emrat[q];
 
-                    <li class="list-group-item d-flex justify-content-between align-items-center @((active)?" active":"")">
-                        <a class="btn btn-link @((active)?" text-white":"")" href="javascript:void(0);" @onclick="@(()=>EmriIZgjedhur = Emrat[q])">@Emrat[q].NjejesiPashquar, @Emrat[q].NjejesiShquar, @Emrat[q].ShumesiShquar</a>
+                    <li @onclick="@(()=>EmriIZgjedhur = Emrat[q])" class="hover @Globals.ListJustified @((active)?" active":"")">
+                        @*<a class="btn btn-link @((active)?" text-white":"")" href="javascript:void(0);" >@Emrat[q].NjejesiPashquar, @Emrat[q].NjejesiShquar, @Emrat[q].ShumesiShquar</a>*@
+
+                        <span class="@((active)?" text-white":"")">
+                            @Emrat[q].NjejesiPashquar, @Emrat[q].NjejesiShquar, @Emrat[q].ShumesiShquar
+                        </span>
+
                     </li>
 
 
@@ -200,10 +276,26 @@ else
 
     private Emer EmriIZgjedhur { get; set; }
 
+    private int PageSize { get; set; } = 10;
+    private int PageIndex { get; set; } = 0;
+
+    private int TotalPages { get; set; } = 0;
+
+    private string Filter { get; set; } = "";
+    private string SortOrder { get; set; } = "";
+
+    private int TotalItems { get; set; }
 
 
 
     protected async override Task OnInitializedAsync()
+    {
+
+        await GetPageFiltered();
+
+    }
+
+    private async Task GetPageFiltered()
     {
         var token = await JS.GetFromLocalStorage(Shqip.Auth.JWTAuthenticationProvider.TOKENKEY);
 
@@ -214,12 +306,23 @@ else
 
         Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", token);
 
-        var r = await Http.GetAsync("api/Emrat");
+        //var r = await Http.GetAsync("api/Emrat");
+
+
+        var r = await Http.GetAsync($"api/Emrat/paged?pageSize={PageSize}&PageIndex={PageIndex}&filter={Filter}&sortOrder={SortOrder}");
+
+        IEnumerable<string> headerValues = r.Headers.GetValues("TotalItems");
+        var ti = headerValues.FirstOrDefault();
+
+        if (!string.IsNullOrEmpty(ti))
+        {
+            TotalItems = int.Parse(ti);
+        }
+
         var json = (await r.Content.ReadAsStringAsync());
         Emrat = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Model.Emer>>(json);
 
-
+        TotalPages = TotalItems / PageSize;
     }
-
 
 }

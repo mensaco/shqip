@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shqip.Data
 {
@@ -7,8 +8,9 @@ namespace Shqip.Data
     /// </summary>
     public class ApplicationUser:IdentityUser
     {
-
+        [MaxLength(30)]
         public string Titulli { get; set; }
+        [MaxLength(30)]
         public string Vendbanimi { get; set; }
 
     }

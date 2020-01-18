@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic;
 using Model;
 using Shqip.Data;
 using Shqip.Models;
@@ -15,8 +16,8 @@ namespace Shqip.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class BaseFjaletController<T> : ControllerBase 
-        where T: class, IFjale
+    public class BaseFjaletController<T> : ControllerBase
+        where T : class, IFjale
     {
         private readonly ApplicationDbContext _context;
 
@@ -30,10 +31,53 @@ namespace Shqip.Controllers
         {
             get
             {
-                return _context.Set<T>().Where(i=>i.KontribuesiID == User.Identity.Name);
+                return _context.Set<T>().Where(i => i.KontribuesiID == User.Identity.Name);
             }
         }
 
+
+        //[HttpGet("getpaged")]
+        //public async Task<ResponseMessageResult> GetTPaged(string filter, int pageIndex, int pageSize, string sortOrder )
+        //{
+        //    var items = await Items.ToListAsync();
+
+        //    HttpResponseMessage responseMessage = new HttpResponseMessage(HttpStatusCode.OK);
+        //    responseMessage.Headers.Add("MyHeader", "MyHeaderValue");
+        //    responseMessage.Content = new StringContent("kfdgkjh");
+        //    var response = new ResponseMessageResult(responseMessage);
+
+        //    return response;
+        //}
+
+
+
+        [HttpGet("paged")]
+        public virtual async Task<ActionResult<IEnumerable<T>>> GetTPaged(int pageIndex, int pageSize, string filter, string sortOrder)
+        {
+            if (pageIndex < 0) pageIndex = 0;
+            if (pageSize < 5) pageSize = 5;
+            if (pageSize > 20) pageSize = 20;
+
+            var items = Items;
+            if (!string.IsNullOrEmpty(filter))
+            {
+                items = items.Where(filter);
+            }
+
+            items = items.Skip(pageIndex * pageSize).Take(pageSize);
+
+            if (!string.IsNullOrEmpty(sortOrder))
+            {
+                items = items.OrderBy(sortOrder);
+            }
+
+
+            Response.Headers.Add("TotalItems", Items.Count().ToString());
+
+            var retList = await items.ToListAsync();
+           
+            return retList;
+        }
 
         // GET: api/T
         [HttpGet]

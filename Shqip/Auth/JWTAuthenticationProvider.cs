@@ -29,7 +29,11 @@ namespace Shqip.Auth
         {
             var token = await js.GetFromLocalStorage(TOKENKEY);
 
-            if (string.IsNullOrEmpty(token) || token.ToLower().Contains("invalid login"))
+            if (
+                string.IsNullOrEmpty(token) || 
+                token.ToLower().Contains("invalid login") ||
+                token == "Username or password invalid"
+                )
             {
                 return Anonymous;
             }

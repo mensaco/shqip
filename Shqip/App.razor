@@ -1,31 +1,21 @@
-<Router AppAssembly="typeof(Program).Assembly">
+﻿<Router AppAssembly="typeof(Program).Assembly">
     <Found Context="routeData">
         <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)">
             <Authorizing>
-                customized authorizing...
+                Autorizimi...
             </Authorizing>
             <NotAuthorized>
-                You need to <a href="/login">login</a> to be able to access the requested resource.
+                Duhet të <a href="/login">kyçesh</a> për t'iu qasur resursit të kërkuar.
             </NotAuthorized>
         </AuthorizeRouteView>
     </Found>
     <NotFound>
         <CascadingAuthenticationState>
             <LayoutView Layout="@typeof(MainLayout)">
-                <h1>Page not found</h1>
-                <p>Sorry, but there's nothing here!</p>
+                <h1>Faqja nuk u gjet.</h1>
+                <p>Kontrollo edhe një herë adresën e faqes.</p>
             </LayoutView>
         </CascadingAuthenticationState>
     </NotFound>
 </Router>
 
-@*<Router AppAssembly="@typeof(Program).Assembly">
-        <Found Context="routeData">
-            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-        </Found>
-        <NotFound>
-            <LayoutView Layout="@typeof(MainLayout)">
-                <p>Sorry, there's nothing at this address.</p>
-            </LayoutView>
-        </NotFound>
-    </Router>*@
